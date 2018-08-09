@@ -1,0 +1,2 @@
+# sequelizedburgersk
+mySQL burger sequelized
