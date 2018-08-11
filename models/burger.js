@@ -4,31 +4,21 @@
 //     * Inside`burger.js`, import `orm.js` into`burger.js`
 //     * Also inside`burger.js`, create the code that will call the ORM functions 
 //         using burger specific input for the ORM.
-//     * Export at the end of the`burger.js` file.
-
-// Import the ORM to create functions that will interact with the database.
-var orm = require("../config/orm.js");
-
 // code that will call the ORM functions 
-var burger = {
-    all: function (cb) {
-        orm.selectAll("burgers", function (res) {
-            cb(res);
-        });
-    },
-    // The variables cols and vals are arrays.
-    create: function (cols, vals, cb) {
-        orm.insertOne("burgers", cols, vals, function (res) {
-            cb(res);
-        });
-    },
-    update: function (objColVals, condition, cb) {
-        orm.updateOne("burgers", objColVals, condition, function (res) {
-            cb(res);
-        });
-    }
-};
+// * Replacing your MySQL`Burger` model with a Sequelized equivalent.
+
+//     * Don't forget to edit the model and initial migration file to make the burger's devoured field carry a default value of false -- otherwise you might encounter bugs.
+//       * There's no option to include that default in the command line, so you'll need to open up your editor to make this change. 
+//     * Don't forget to sync the models!
 
 
-//  * Export at the end of the`burger.js` file.
-module.exports = burger;
+module.exports = function (sequelize, DataTypes) {
+    var burger = sequelize.define("burger", {
+        burger_name: DataTypes.STRING,
+        devoured: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
+        }
+    });
+    return burger;
+}

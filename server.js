@@ -44,6 +44,8 @@ var routes = require("./controllers/burgers_controller.js");
 // app.use("/", routes);
 app.use(routes);
 
+
+db.sequelize
 app.listen(PORT, function () {
     console.log("App listening on PORT " + PORT);
 });

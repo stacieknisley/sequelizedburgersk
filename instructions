@@ -14,7 +14,9 @@ In this assignment, you're going to Sequelize the `Burger` app you made last wee
    * Then connect this folder with a new github repo.
 3. Run `sequelize init` to create the necessary files.
 
-4. **Note**: If for any reason you don't have a finished assignment for last week, no problem. Message the instructor, who will provide you will a skeleton file to work of for this week.
+4. **Note**: If for any reason you don't have a finished assignment for 
+last week, no problem. Message the instructor, who will provide you will 
+a skeleton file to work of for this week.
 
 ### Submission on BCS
 
@@ -26,7 +28,8 @@ Put in your best efforts to complete one of the three available challenge tiers.
 
 #### Tier 1: Sequelized! (Basic to Moderate)
 
-* Remove all references to your vanilla MySQL queries and replace them with Sequelize queries.
+* Remove all references to your vanilla MySQL queries and replace them with
+ Sequelize queries.
 
 * That means:
 

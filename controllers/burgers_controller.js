@@ -7,51 +7,47 @@
 // 4. Create the`router` for the app, and export the`router` at the end of your file.
 
 var express = require("express");
+var db = require("../models/");
 
 var router = express.Router();
 
+// /  ÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷+++++++++++++++++++++++++++++  
+//  * Remove your old ORM file, as well as any references to it in 
+//  * `burgers_controller.js`.
+//  * Replace those references with Sequelize's ORM methods.
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // Import the model (cat.js) to use its database functions.
-var burger = require("../models/burger.js");
-
-
-
+//var burger = require("../models/burger.js");
 
 // Create all our routes and set up logic within those routes where required.
 router.get("/", function (req, res) {
-    burger.all(function (data) {
-        // var rs = {
-        //     burgers: data
-        // };
-        // console.log(hbsObject);
-        res.render("index", { burgers: data });
+    db.burger.findAll().then(function (dbBurger) {
+        var hbObject = { burger: dbBurger };
+        return res.render("index", hbObject);
     });
 });
 
 router.post("/api/burgers/post", function (req, res) {
-    burger.create([
-        "burger_name"
-    ], [
-            req.body.burger_name
-        ], function (result) {
-            // Send back the ID of the new quote
-            res.json({ id: result.insertId });
-        });
+    db.burger.create({
+        burger_name: req.body.burger_name
+    }).then(function (dbBurger) {
+        res.redirect("/");
+    })
 });
 
+
 router.put("/api/burgers/:id", function (req, res) {
-    var condition = "id = " + req.params.id;
 
-    console.log("condition", condition);
 
-    burger.update({
+    db.burger.update({
         devoured: true
-    }, condition, function (result) {
-        if (result.changedRows == 0) {
-            // If no rows were changed, then the ID must not exist, so 404
-            return res.status(404).end();
-        } else {
-            res.status(200).end();
+    }, {
+            where: {
+                id: req.body.burger_id
+            }
         }
+    ).then(function (dbBurger) {
+        res.redirect("/");
     });
 });
 
